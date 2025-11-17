@@ -1,0 +1,586 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAMPEONATO JACAREZÃO 2027</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =============================================================
+           1. ESTILOS GLOBAIS E DA TELA PRINCIPAL (HOME)
+           ============================================================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0b220b;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        /* O CONTAINER PRINCIPAL OCUPA O ESPAÇO ENTRE LOGO E RODAPÉ */
+        #site-container {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 0 10px;
+        }
+
+        /* --- Logo e Header --- */
+        .logo-area {
+            width: 100%;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-image {
+            max-width: 250px;
+            height: auto;
+            background-color: #1a4a1a;
+            min-height: 100px;
+            border-radius: 10px;
+        }
+
+        /* --- Conteúdo Principal (Onde fica a tela ativa) --- */
+        .content-view {
+            width: 100%;
+            flex-grow: 1;
+            padding-bottom: 30px;
+            /* Controla a visibilidade das seções */
+            display: none; 
+        }
+
+        .content-view.active {
+            display: block; /* A seção ativa é exibida */
+        }
+        
+        /* --- Botões de Navegação (Menu Inicial) --- */
+        .main-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #0c330c;
+            padding: 40px 20px;
+            border-radius: 10px;
+        }
+
+        .button {
+            text-decoration: none;
+            padding: 20px 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.3s;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: none; /* Agora são botões JS */
+            cursor: pointer; 
+            transition: transform 0.1s ease-out; 
+            }
+            
+            /* Efeito de pressionar */
+            .button:active {
+                transform: scale(0.98); 
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
+            }
+
+        .button-default {
+            background-color: #1a4a1a;
+        }
+
+        .button-sponsor {
+            background-color: #8c7f3b;
+            margin-top: 15px;
+        }
+
+        /* --- Footer --- */
+        .footer-area {
+            width: 100%;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .sponsors-title {
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            color: #c2c2c2;
+            font-weight: 700;
+        }
+
+        .sponsors-logos {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .medallion {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .medallion-red { border-color: #a33e3e; background-color: #6d2c2c; }
+        .medallion-bronze { border-color: #966f33; background-color: #5e4722; }
+        .medallion-green { border-color: #4a8f4a; background-color: #2e602e; }
+        .medallion-gold { border-color: #c09e4a; background-color: #7d6430; }
+
+        .footer-info {
+            font-size: 0.7em;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        /* --- BOTÃO VOLTAR GLOBAL --- */
+        .back-button {
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #2e602e;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 150px;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            cursor: pointer;
+        }
+        
+        .back-arrow {
+            font-size: 1.5em;
+            
+        }
+
+        /* =============================================================
+           2. ESTILOS DA CLASSIFICAÇÃO (Reutilizados)
+           ============================================================= */
+        .header-classification, .header-matches, .header-rules {
+            width: 100%;
+            padding: 0 20px 20px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1em;
+            font-weight: 700;
+            color: #4CAF50;
+            margin-bottom: 5px;
+        }
+
+        .title {
+            font-size: 1.8em;
+            font-weight: 900;
+            color: white;
+        }
+        
+        .group-info {
+             font-size: 0.8em;
+             color: #81C784;
+             margin-top: 5px;
+        }
+
+        .table-container {
+            background-color: #0c330c;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #1a4a1a;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        thead th {
+            background-color: #1a4a1a;
+            padding: 10px 5px;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            border-bottom: 2px solid #4CAF50;
+            font-size: 0.8em;
+        }
+
+        tbody td {
+            padding: 12px 5px;
+            border-bottom: 1px solid #1a4a1a;
+            color: #c2c2c2;
+            text-align: center;
+        }
+
+        .td-clube {
+            text-align: left;
+            padding-left: 10px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .highlight {
+            color: #4CAF50;
+            font-weight: 900;
+        }
+        
+        .matches-title {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #8c7f3b;
+            color: white;
+            font-size: 1.1em;
+            font-weight: 700;
+            border-radius: 5px;
+        }
+
+        .matches-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .match-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1a4a1a;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        .score {
+            font-weight: 900;
+            font-size: 1.2em;
+            color: white;
+        }
+
+        .winning-score {
+            color: #4CAF50;
+        }
+
+
+        /* =============================================================
+           3. ESTILOS DE PRÓXIMAS PARTIDAS
+           ============================================================= */
+        .match-card {
+            background-color: #1a4a1a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            border: 1px solid #2e602e;
+        }
+
+        .match-date {
+            font-size: 0.9em;
+            color: #4CAF50;
+            font-weight: 700;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #2e602e;
+        }
+
+        .match-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .team-name {
+            font-size: 1.2em;
+            font-weight: 900;
+            color: white;
+            flex-grow: 1;
+        }
+
+        .vs {
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #8c7f3b;
+            padding: 0 10px;
+        }
+
+        /* =============================================================
+           4. ESTILOS DO REGULAMENTO
+           ============================================================= */
+        .rules-container {
+            background-color: #0c330c;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            border: 1px solid #1a4a1a;
+            margin-top: 10px;
+        }
+
+        .rule-section {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2e602e;
+        }
+        
+        .rule-section h2 {
+            font-size: 1.2em;
+            color: #8c7f3b;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .rule-section p {
+            font-size: 0.9em;
+            color: #c2c2c2;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
+
+        .attention {
+            color: #FFEB3B;
+            font-style: italic;
+            font-weight: 700;
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #8c7f3b;
+            border-radius: 5px;
+            background-color: rgba(140, 127, 59, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="logo-area">
+        <img src="jacarezao_logo.png" alt="CAMPEONATO JACAREZÃO 2027" class="logo-image">
+    </header>
+
+    <div id="site-container">
+
+        <div id="home" class="content-view active">
+            <div class="main-menu">
+                <button onclick="showScreen('classification')" class="button button-default">CLASSIFICAÇÃO</button>
+                <button onclick="showScreen('matches')" class="button button-default">PRÓXIMAS PARTIDAS</button>
+                <button onclick="showScreen('rules')" class="button button-default">REGULAMENTO DO CAMPEONATO</button>
+                <button class="button button-sponsor">QUER SER UM PATROCINADOR?</button>
+            </div>
+        </div>
+        
+        <div id="classification" class="content-view">
+            <header class="header-classification">
+                <h3 class="subtitle">CLASSIFICAÇÃO</h3>
+                <h1 class="title">JACAREZÃO 2027</h1>
+                <p class="group-info">APRESENTAÇÃO GRUPO A/B</p>
+            </header>
+
+            <div class="table-container">
+    <table>
+        <thead>
+            </thead>
+        <tbody id="tabela-classificacao">
+            </tbody>
+    </table>
+</div>
+<main class="main-content" id="proximos-jogos-container">
+    </main>
+
+            
+            <button onclick="showScreen('home')" class="back-button"><span class="back-arrow">↩</span> VOLTAR</button>
+        </div>
+
+        <div id="matches" class="content-view">
+            <header class="header-matches">
+                <h3 class="subtitle">CALENDÁRIO DE JOGOS</h3>
+                <h1 class="title">PRÓXIMAS PARTIDAS</h1>
+                <p class="group-info">SEMANA 4 - GRUPO A</p>
+            </header>
+
+            <div class="match-card">
+                <p class="match-date">SÁBADO, 25/FEV | 10:00</p>
+                <div class="match-teams">
+                    <span class="team-name team-home">ITAJUBA F.C</span>
+                    <span class="vs">VS</span>
+                    <span class="team-name team-away">PSG</span>
+                </div>
+                <p class="match-location">Campo do Jacaré | Transmissão: Canal do Zé</p>
+            </div>
+            
+            <button onclick="showScreen('home')" class="back-button"><span class="back-arrow">↩</span> VOLTAR</button>
+        </div>
+
+        <div id="rules" class="content-view">
+            <header class="header-rules">
+                <h3 class="subtitle">DOCUMENTO OFICIAL</h3>
+                <h1 class="title">REGULAMENTO DO CAMPEONATO</h1>
+            </header>
+
+            <div class="rules-container">
+                <section class="rule-section">
+                    <h2>1. DA ORGANIZAÇÃO</h2>
+                    <p>O Campeonato Jacarezão 2027 é organizado pela Comissão de Esportes do Bairro Jacarequara e sua 1ª edição será realizada entre Janeiro e Março.</p>
+                </section>
+
+                <section class="rule-section">
+                    <h2>2. SISTEMA DE DISPUTA</h2>
+                    <p><strong>2.1. Primeira Fase:</strong> Todos jogam contra todos em turno único (7 rodadas).</p>
+                    <p class="attention"><strong>Atenção:</strong> Insultos à arbitragem ou brigas resultarão em exclusão imediata do atleta do campeonato.</p>
+                </section>
+            </div>
+            
+            <button onclick="showScreen('home')" class="back-button"><span class="back-arrow">↩</span> VOLTAR</button>
+        </div>
+
+    </div> <footer class="footer-area">
+        <p class="sponsors-title">PATROCINADORES:</p>
+        <div class="sponsors-logos">
+            <div class="medallion medallion-red"></div>
+            <div class="medallion medallion-bronze"></div>
+            <div class="medallion medallion-green"></div>
+            <div class="medallion medallion-gold"></div>
+            <div class="medallion medallion-bronze"></div>
+        </div>
+        <p class="footer-info">@jacarezao2027 | Janeiro-Março 2027</p>
+        <p class="footer-info">Jacarequara - 1ª Edição</p>
+    </footer>
+    
+    <script>
+        function showScreen(screenId) {
+            // 1. Oculta todas as seções de conteúdo
+            var screens = document.querySelectorAll('.content-view');
+            screens.forEach(function(screen) {
+                screen.classList.remove('active');
+            });
+
+            // 2. Exibe apenas a seção clicada
+            var targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                // Rola para o topo da página (opcional, mas bom para mobile)
+                window.scrollTo(0, 0); 
+            }
+        }
+    // --- FUNÇÃO EXISTENTE: showScreen(screenId) deve estar aqui ---
+
+    // =============================================================
+    // NOVO: FUNÇÃO PARA CARREGAR E RENDERIZAR OS DADOS DO JSON
+    // =============================================================
+
+    document.addEventListener('DOMContentLoaded', () => {
+        carregarDados();
+    });
+
+    async function carregarDados() {
+        try {
+            // 1. FAZ A REQUISIÇÃO DO ARQUIVO data.json
+            const response = await fetch('data.json');
+            if (!response.ok) {
+                throw new Error('Erro ao carregar data.json');
+            }
+            const data = await response.json();
+
+            // 2. RENDEIRIZA A CLASSIFICAÇÃO
+            renderizarClassificacao(data.classificacao);
+
+            // 3. RENDEIRIZA AS ÚLTIMAS PARTIDAS
+            renderizarUltimasPartidas(data.ultimasPartidas);
+
+            // 4. RENDEIRIZA AS PRÓXIMAS PARTIDAS
+            renderizarProximosJogos(data.proximosPartidas);
+
+        } catch (error) {
+            console.error("Erro no carregamento de dados:", error);
+            // Mostrar uma mensagem de erro na tela, se necessário
+        }
+    }
+
+    // --- FUNÇÕES DE RENDERIZAÇÃO ---
+
+    function renderizarClassificacao(times) {
+        const tabelaBody = document.getElementById('tabela-classificacao');
+        let html = '';
+
+        times.forEach(time => {
+            const highlightClass = time.highlight ? 'highlight' : '';
+            html += `
+                <tr>
+                    <td class="td-pos">${time.pos}</td>
+                    <td class="td-clube">${time.clube}</td>
+                    <td class="td-pj">${time.pj}</td>
+                    <td class="td-sg">${time.sg}</td>
+                    <td class="td-pts ${highlightClass}">${time.pts}</td>
+                </tr>
+            `;
+        });
+        tabelaBody.innerHTML = html;
+    }
+
+    function renderizarUltimasPartidas(partidas) {
+        const container = document.getElementById('ultimas-partidas');
+        let html = '';
+
+        partidas.forEach(p => {
+            const winningClass1 = p.placar1 > p.placar2 ? 'winning-score' : '';
+            const winningClass2 = p.placar2 > p.placar1 ? 'winning-score' : '';
+
+            html += `
+                <div class="match-row">
+                    <div class="team-left">${p.time1}</div>
+                    <div class="score">
+                        <span class="score-home ${winningClass1}">${p.placar1}</span> : <span class="score-away ${winningClass2}">${p.placar2}</span>
+                    </div>
+                    <div class="team-right">${p.time2}</div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    function renderizarProximosJogos(jogos) {
+        const container = document.getElementById('proximos-jogos-container');
+        let html = '';
+
+        jogos.forEach(j => {
+            html += `
+                <div class="match-card">
+                    <p class="match-date">${j.diaHora}</p>
+                    <div class="match-teams">
+                        <span class="team-name team-home">${j.time1}</span>
+                        <span class="vs">VS</span>
+                        <span class="team-name team-away">${j.time2}</span>
+                    </div>
+                    <p class="match-location">${j.localTransmissao}</p>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    </script>
+
+</body>
+</html>
+
+

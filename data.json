@@ -1,0 +1,26 @@
+
+{
+  "classificacao": [
+    {"pos": 1, "clube": "FC. RUA GRANDE", "pj": 15, "sg": 16, "pts": 38, "highlight": true},
+    {"pos": 2, "clube": "FC. RUA DO CAMPO", "pj": 15, "sg": 11, "pts": 27, "highlight": false},
+    {"pos": 3, "clube": "PSG", "pj": 15, "sg": 9, "pts": 24, "highlight": false},
+    {"pos": 4, "clube": "BARCELONA", "pj": 14, "sg": 4, "pts": 16, "highlight": false},
+    {"pos": 5, "clube": "ITAJUBA F.C", "pj": 15, "sg": 0, "pts": 16, "highlight": false},
+    {"pos": 6, "clube": "BEIRA RIO FC", "pj": 15, "sg": -1, "pts": 13, "highlight": false},
+    {"pos": 7, "clube": "SAO BENTO FC", "pj": 14, "sg": -7, "pts": 8, "highlight": false},
+    {"pos": 8, "clube": "PORTO FC", "pj": 15, "sg": -16, "pts": 5, "highlight": false}
+  ],
+  "ultimasPartidas": [
+    {"time1": "DENMARK 🇩🇰", "placar1": 3, "time2": "BELGIUM 🇧🇪", "placar2": 1},
+    {"time1": "PORTUGAL 🇵🇹", "placar1": 2, "time2": "KOREA 🇰🇷", "placar2": 3},
+    {"time1": "CANADA 🇨🇦", "placar1": 2, "time2": "GERMANY 🇩🇪", "placar2": 0},
+    {"time1": "BRAZIL 🇧🇷", "placar1": 4, "time2": "ARGENTINA 🇦🇷", "placar2": 2}
+  ],
+  "proximosPartidas": [
+    {"time1": "ITAJUBA F.C", "time2": "PSG", "diaHora": "SÁBADO, 25/FEV | 10:00", "localTransmissao": "Campo do Jacaré | Transmissão: Canal do Zé"},
+    {"time1": "FC. RUA GRANDE", "time2": "PORTO FC", "diaHora": "SÁBADO, 25/FEV | 11:30", "localTransmissao": "Campo do Jacaré | Transmissão: Rádio Bairro"},
+    {"time1": "SAO BENTO FC", "time2": "BARCELONA", "diaHora": "DOMINGO, 26/FEV | 10:00", "localTransmissao": "Campo do Jacaré | Transmissão: Nenhuma"}
+  ]
+}
+
+
